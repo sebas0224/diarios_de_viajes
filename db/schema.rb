@@ -11,21 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150906181321) do
+ActiveRecord::Schema.define(version: 20150913025548) do
 
   create_table "citytowns", force: :cascade do |t|
+    t.integer  "country_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "state"
-    t.integer  "id_country"
   end
+
+  add_index "citytowns", ["country_id"], name: "index_citytowns_on_country_id"
 
   create_table "comments", force: :cascade do |t|
     t.string   "content"
+    t.integer  "story_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "id_story"
   end
+
+  add_index "comments", ["story_id"], name: "index_comments_on_story_id"
 
   create_table "countries", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -34,21 +38,26 @@ ActiveRecord::Schema.define(version: 20150906181321) do
   end
 
   create_table "places", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "citytown_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "type"
-    t.integer  "id_city"
   end
 
+  add_index "places", ["citytown_id"], name: "index_places_on_citytown_id"
+
   create_table "stories", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "place_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "content"
     t.string   "tittle"
     t.date     "date"
-    t.integer  "id_user"
-    t.integer  "id_country"
   end
+
+  add_index "stories", ["place_id"], name: "index_stories_on_place_id"
+  add_index "stories", ["user_id"], name: "index_stories_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -56,6 +65,7 @@ ActiveRecord::Schema.define(version: 20150906181321) do
     t.string   "mail"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "salt"
   end
 
 end
