@@ -1,5 +1,5 @@
 class AddTypeToPlaces < ActiveRecord::Migration
   def change
-    add_column :places, :type, :string
+    add_column :places, :tipo, :string
   end
 end

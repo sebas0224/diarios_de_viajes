@@ -1,4 +1,4 @@
 class Comment < ActiveRecord::Base
-	validates :content, :id_story, presence: true
+	validates :content, :story_id, presence: true
 	belongs_to :story
 end

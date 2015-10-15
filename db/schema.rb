@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(version: 20150913025548) do
 
   create_table "citytowns", force: :cascade do |t|
+    t.string   "name"
     t.integer  "country_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -32,16 +33,18 @@ ActiveRecord::Schema.define(version: 20150913025548) do
   add_index "comments", ["story_id"], name: "index_comments_on_story_id"
 
   create_table "countries", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "continent"
   end
 
   create_table "places", force: :cascade do |t|
+    t.string   "name"
     t.integer  "citytown_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "type"
+    t.string   "tipo"
   end
 
   add_index "places", ["citytown_id"], name: "index_places_on_citytown_id"
@@ -61,10 +64,11 @@ ActiveRecord::Schema.define(version: 20150913025548) do
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
-    t.string   "password"
+    t.string   "password_digest"
     t.string   "mail"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "token"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "salt"
   end
 
